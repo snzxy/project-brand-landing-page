@@ -1,0 +1,404 @@
+/* =========================================================
+   GENUVALY — DESIGN TOKENS
+   Semua warna, font, dan spacing terpusat di sini (CSS Variables).
+   Kalau nanti mau ganti tone warna brand, cukup ubah di satu tempat ini.
+========================================================= */
+:root {
+  /* Warna dasar — terinspirasi archive military & terrace culture,
+     bukan cream/hangat template AI pada umumnya */
+  --color-ink: #14140f;          /* nyaris hitam, untuk teks utama */
+  --color-paper: #f2f1ec;        /* stone white, background utama */
+  --color-paper-soft: #e9e7df;   /* sedikit lebih gelap dari paper, untuk section alternate */
+  --color-accent: #4a4a36;       /* olive/khaki gelap — aksen premium */
+  --color-accent-soft: #8c8a74;  /* olive muda — teks sekunder/label */
+  --color-line: #d4d1c6;         /* garis/border tipis */
+  --color-white: #ffffff;
+
+  /* Tipografi */
+  --font-display: 'Bebas Neue', sans-serif;   /* logo & headline besar */
+  --font-body: 'Inter', sans-serif;           /* body text & nav */
+  --font-mono: 'Space Mono', monospace;       /* label kecil, kode produk */
+
+  /* Spacing scale (8px based) */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-6: 3rem;
+  --space-8: 4rem;
+
+  /* Layout */
+  --navbar-height: 72px;
+  --max-width: 1440px;
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================================================
+   RESET
+   Menghilangkan default styling browser yang tidak konsisten
+========================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background-color: var(--color-paper);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Menghormati user yang menonaktifkan animasi di OS-nya */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Skip link — muncul hanya saat difokus via keyboard (Tab) */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--space-2);
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding: var(--space-1) var(--space-2);
+  z-index: 200;
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: var(--space-2);
+}
+
+/* Focus state yang jelas untuk keyboard navigation (aksesibilitas) */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--navbar-height);
+  z-index: 100;
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background-color var(--transition-medium),
+              border-color var(--transition-medium);
+}
+
+/* Class ini ditambahkan lewat JavaScript saat user scroll ke bawah */
+.navbar.is-scrolled {
+  background-color: rgba(242, 241, 236, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom-color: var(--color-line);
+}
+
+.navbar__inner {
+  max-width: var(--max-width);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+/* --- Logo --- */
+.navbar__logo {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+/* --- Nav links (desktop) --- */
+.navbar__nav {
+  display: none; /* mobile-first: sembunyikan dulu, tampilkan di breakpoint tablet */
+}
+
+.navbar__list {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.navbar__link {
+  position: relative;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: var(--space-1) 0;
+}
+
+/* Micro-interaction: garis bawah muncul dari tengah saat hover */
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-ink);
+  transition: width var(--transition-fast), left var(--transition-fast);
+}
+
+.navbar__link:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* --- Actions (search, account, bag) --- */
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.navbar__icon-btn {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ink);
+  border-radius: 50%;
+  transition: background-color var(--transition-fast);
+}
+
+.navbar__icon-btn:hover {
+  background-color: var(--color-paper-soft);
+}
+
+.navbar__icon-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.navbar__icon-btn--hide-mobile {
+  display: none;
+}
+
+.navbar__badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 3px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* --- Burger button (mobile) --- */
+.navbar__burger {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 6px;
+}
+
+.navbar__burger-line {
+  width: 24px;
+  height: 1.5px;
+  background-color: var(--color-ink);
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+/* Animasi burger jadi "X" saat menu terbuka (class ditambah via JS) */
+.navbar__burger.is-active .navbar__burger-line:first-child {
+  transform: translateY(3.75px) rotate(45deg);
+}
+
+.navbar__burger.is-active .navbar__burger-line:last-child {
+  transform: translateY(-3.75px) rotate(-45deg);
+}
+
+/* =========================================================
+   MOBILE DRAWER MENU
+========================================================= */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(320px, 85vw);
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  z-index: 150;
+  padding: var(--space-8) var(--space-4) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: translateX(100%);
+  transition: transform var(--transition-medium);
+}
+
+.mobile-menu.is-open {
+  transform: translateX(0);
+}
+
+.mobile-menu__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.mobile-menu__link {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 0.02em;
+  padding: var(--space-1) 0;
+  border-bottom: 1px solid rgba(242, 241, 236, 0.15);
+}
+
+.mobile-menu__link span {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-accent-soft);
+}
+
+.mobile-menu__footnote {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-accent-soft);
+  letter-spacing: 0.04em;
+}
+
+.mobile-menu__overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(20, 20, 15, 0.5);
+  z-index: 140;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-medium), visibility var(--transition-medium);
+}
+
+.mobile-menu__overlay.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Saat drawer terbuka, kunci scroll body (class ditambah via JS) */
+body.menu-open {
+  overflow: hidden;
+}
+
+/* =========================================================
+   TEMPORARY PLACEHOLDER
+   Hanya untuk demo efek scroll navbar.
+   Akan digantikan Hero Section asli di lesson berikutnya.
+========================================================= */
+.temp-placeholder {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  background: linear-gradient(180deg, var(--color-paper-soft), var(--color-paper));
+  border-bottom: 1px dashed var(--color-line);
+}
+
+.temp-placeholder--alt {
+  background: linear-gradient(180deg, var(--color-paper), var(--color-paper-soft));
+}
+
+.temp-placeholder__hint {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-accent-soft);
+}
+
+/* =========================================================
+   RESPONSIVE — TABLET & DESKTOP
+   Mobile-first: style di atas untuk mobile,
+   lalu ditambah/ditimpa di sini untuk layar lebih besar
+========================================================= */
+@media (min-width: 768px) {
+  .navbar__burger {
+    display: none;
+  }
+
+  .navbar__nav {
+    display: block;
+  }
+
+  .navbar__icon-btn--hide-mobile {
+    display: flex;
+  }
+
+  .navbar__inner {
+    padding: 0 var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --navbar-height: 84px;
+  }
+
+  .navbar__logo {
+    font-size: 2rem;
+  }
+}
