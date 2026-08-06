@@ -1,21 +1,58 @@
-# Genuvaly — Unofficial Concept Landing Page
+# Genuvaly — Brand Landing Page
 
-Project belajar Web Development (UNOFFICIAL FAN PROJECT).
-Bukan website resmi Genuvaly. Dibuat untuk tujuan portofolio & belajar.
+A modern streetwear/fashion brand landing page for Genuvaly.
 
-## Status
-✅ Section 1: Navbar (selesai)
-⬜ Section 2: Hero
-⬜ Section 3: Featured Collection
-⬜ Section 4: New Arrival
-⬜ Section 5: Best Seller
-⬜ Section 6: About Brand
-⬜ Section 7: Lifestyle Banner
-⬜ Section 8: CTA
-⬜ Section 9: Footer
+---
 
-## Struktur
-- index.html
-- style.css
-- script.js
-- assets/icons, assets/images
+## Features
+
+- Responsive navigation with mobile burger menu
+- Cinematic hero section with video background and poster fallback
+- Hero content positioned bottom-left with fade-in-from-below entrance animation
+- Modern, minimal UI
+- Mobile-first layout
+
+---
+
+## Tech Stack
+
+- HTML5
+- CSS3 (custom properties, no framework)
+- JavaScript (Vanilla, no dependencies)
+- Google Fonts: Bebas Neue, Inter, Space Mono
+
+---
+
+## Project Status
+
+- ✅ Navigation
+- ✅ Hero Section
+- ⏳ Featured Collection
+- ⏳ New Arrival
+- ⏳ Best Seller
+- ⏳ About Brand
+- ⏳ Footer
+
+---
+
+## Folder Structure
+
+```
+genuvaly/
+├── index.html
+├── style.css
+├── script.js
+└── assets/
+    ├── images/
+    └── videos/
+```
+
+---
+
+## Running Locally
+
+Static site, no build step. Open `index.html` in a browser, or serve the folder with any static server:
+
+```
+npx serve .
+```

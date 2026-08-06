@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GENUVALY — Unofficial Concept</title>
-  <meta name="description" content="Genuvaly — konsep landing page unofficial untuk brand fashion lokal. Dibuat untuk tujuan portofolio & belajar." />
+  <title>GENUVALY</title>
+  <meta name="description" content="Genuvaly — minimal streetwear inspired by culture, movement, and confidence." />
 
-  <!-- Preconnect ke Google Fonts untuk performa loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -15,22 +14,15 @@
 </head>
 <body>
 
-  <!-- Skip link untuk aksesibilitas keyboard: user bisa lompat langsung ke konten utama -->
-  <a href="#main-content" class="skip-link">Lewati ke konten utama</a>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- ========================================
-       NAVBAR
-       - position: fixed, transparan di atas hero
-       - berubah solid saat user scroll (lihat script.js)
-  ========================================= -->
   <header class="navbar" data-navbar>
     <div class="navbar__inner">
 
-      <!-- Hamburger menu (mobile only) -->
       <button
         class="navbar__burger"
         data-menu-toggle
-        aria-label="Buka menu navigasi"
+        aria-label="Open navigation menu"
         aria-expanded="false"
         aria-controls="mobile-menu"
       >
@@ -38,13 +30,11 @@
         <span class="navbar__burger-line"></span>
       </button>
 
-      <!-- Logo / Brand mark -->
-      <a href="#" class="navbar__logo" aria-label="Genuvaly — kembali ke beranda">
+      <a href="#" class="navbar__logo" aria-label="Genuvaly — home">
         GENUVALY
       </a>
 
-      <!-- Navigasi utama (desktop) -->
-      <nav class="navbar__nav" aria-label="Navigasi utama">
+      <nav class="navbar__nav" aria-label="Primary">
         <ul class="navbar__list">
           <li><a href="#featured" class="navbar__link">Collection</a></li>
           <li><a href="#new-arrival" class="navbar__link">New Arrival</a></li>
@@ -53,23 +43,22 @@
         </ul>
       </nav>
 
-      <!-- Aksi kanan: search, account, bag -->
       <div class="navbar__actions">
-        <button class="navbar__icon-btn" aria-label="Cari produk">
+        <button class="navbar__icon-btn" aria-label="Search">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
             <circle cx="11" cy="11" r="7"/>
             <line x1="21" y1="21" x2="16.65" y2="16.65"/>
           </svg>
         </button>
 
-        <button class="navbar__icon-btn navbar__icon-btn--hide-mobile" aria-label="Akun saya">
+        <button class="navbar__icon-btn navbar__icon-btn--hide-mobile" aria-label="Account">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
             <path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/>
             <circle cx="12" cy="7" r="4"/>
           </svg>
         </button>
 
-        <button class="navbar__icon-btn" aria-label="Keranjang belanja, 0 item">
+        <button class="navbar__icon-btn" aria-label="Cart, 0 items">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
             <path d="M6 7h12l-1 13H7L6 7z"/>
             <path d="M9 7a3 3 0 0 1 6 0"/>
@@ -81,13 +70,8 @@
     </div>
   </header>
 
-  <!-- ========================================
-       MOBILE DRAWER MENU
-       - tersembunyi secara default (translateX)
-       - dibuka lewat tombol hamburger di atas
-  ========================================= -->
   <div class="mobile-menu" id="mobile-menu" data-mobile-menu>
-    <nav aria-label="Navigasi mobile">
+    <nav aria-label="Mobile">
       <ul class="mobile-menu__list">
         <li><a href="#featured" class="mobile-menu__link" data-menu-link><span>01</span>Collection</a></li>
         <li><a href="#new-arrival" class="mobile-menu__link" data-menu-link><span>02</span>New Arrival</a></li>
@@ -98,23 +82,41 @@
     <p class="mobile-menu__footnote">Genuvaly — Unofficial Concept Project</p>
   </div>
 
-  <!-- Overlay gelap di belakang drawer, klik untuk menutup -->
   <div class="mobile-menu__overlay" data-menu-overlay></div>
 
-  <!-- ========================================
-       MAIN CONTENT
-       Section lain (Hero, Featured, dst) menyusul
-       di lesson berikutnya. Placeholder di bawah
-       HANYA untuk mendemonstrasikan efek navbar
-       transparan → solid saat scroll.
-  ========================================= -->
   <main id="main-content">
-    <div class="temp-placeholder">
-      <p>Hero Section &amp; section lainnya menyusul di lesson berikutnya.</p>
-      <p class="temp-placeholder__hint">Scroll ke bawah untuk lihat efek navbar berubah solid ↓</p>
-    </div>
+
+    <section class="hero" id="hero" aria-label="Genuvaly campaign">
+      <div class="hero__media">
+        <video
+          class="hero__video"
+          autoplay
+          muted
+          loop
+          playsinline
+          poster="assets/images/hero-campaign-poster.jpg"
+        >
+          <source src="assets/videos/hero-campaign.mp4" type="video/mp4" />
+        </video>
+        <div class="hero__overlay"></div>
+      </div>
+
+      <div class="hero__content">
+        <p class="hero__eyebrow hero__anim hero__anim--1">GENUVALY</p>
+        <h1 class="hero__headline hero__anim hero__anim--2">Minimal Streetwear<br />Inspired by Everyday Movement.</h1>
+        <p class="hero__desc hero__anim hero__anim--3">Designed with clean silhouettes, modern aesthetics, and confidence for everyday wear.</p>
+        <div class="hero__actions hero__anim hero__anim--4">
+          <a href="#featured" class="btn btn--primary btn--on-dark">Explore Collection</a>
+        </div>
+      </div>
+
+      <div class="hero__scroll" aria-hidden="true">
+        <span class="hero__scroll-line"></span>
+      </div>
+    </section>
+
     <div class="temp-placeholder temp-placeholder--alt">
-      <p>Placeholder konten tambahan untuk demo scroll.</p>
+      <p>Featured Collection</p>
     </div>
   </main>
 

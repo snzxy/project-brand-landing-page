@@ -1,20 +1,8 @@
-/* =========================================================
-   GENUVALY — NAVBAR SCRIPT
-   Dua tanggung jawab saja di file ini (Single Responsibility):
-   1. Mengubah navbar jadi solid saat user scroll ke bawah
-   2. Membuka/menutup drawer menu di mobile
-========================================================= */
-
-// 'use strict' membantu menangkap kesalahan umum JS lebih awal
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
-
-  /* -----------------------------------------
-     1. NAVBAR SCROLL EFFECT
-  ----------------------------------------- */
   const navbar = document.querySelector('[data-navbar]');
-  const SCROLL_THRESHOLD = 40; // px, jarak scroll sebelum navbar berubah solid
+  const SCROLL_THRESHOLD = 40;
 
   function handleScroll() {
     if (window.scrollY > SCROLL_THRESHOLD) {
@@ -24,14 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Jalankan sekali saat load, untuk jaga-jaga kalau halaman di-reload dalam posisi scroll
   handleScroll();
   window.addEventListener('scroll', handleScroll, { passive: true });
 
-
-  /* -----------------------------------------
-     2. MOBILE DRAWER MENU
-  ----------------------------------------- */
   const burgerBtn = document.querySelector('[data-menu-toggle]');
   const mobileMenu = document.querySelector('[data-mobile-menu]');
   const overlay = document.querySelector('[data-menu-overlay]');
@@ -61,16 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
   burgerBtn.addEventListener('click', toggleMenu);
   overlay.addEventListener('click', closeMenu);
 
-  // Tutup menu otomatis saat salah satu link diklik (UX: user tidak perlu 2x tap)
   menuLinks.forEach((link) => {
     link.addEventListener('click', closeMenu);
   });
 
-  // Tutup menu dengan tombol Escape (aksesibilitas keyboard)
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) {
       closeMenu();
     }
   });
-
 });

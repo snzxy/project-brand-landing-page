@@ -1,25 +1,16 @@
-/* =========================================================
-   GENUVALY — DESIGN TOKENS
-   Semua warna, font, dan spacing terpusat di sini (CSS Variables).
-   Kalau nanti mau ganti tone warna brand, cukup ubah di satu tempat ini.
-========================================================= */
 :root {
-  /* Warna dasar — terinspirasi archive military & terrace culture,
-     bukan cream/hangat template AI pada umumnya */
-  --color-ink: #14140f;          /* nyaris hitam, untuk teks utama */
-  --color-paper: #f2f1ec;        /* stone white, background utama */
-  --color-paper-soft: #e9e7df;   /* sedikit lebih gelap dari paper, untuk section alternate */
-  --color-accent: #4a4a36;       /* olive/khaki gelap — aksen premium */
-  --color-accent-soft: #8c8a74;  /* olive muda — teks sekunder/label */
-  --color-line: #d4d1c6;         /* garis/border tipis */
+  --color-ink: #14140f;
+  --color-paper: #f2f1ec;
+  --color-paper-soft: #e9e7df;
+  --color-accent: #4a4a36;
+  --color-accent-soft: #8c8a74;
+  --color-line: #d4d1c6;
   --color-white: #ffffff;
 
-  /* Tipografi */
-  --font-display: 'Bebas Neue', sans-serif;   /* logo & headline besar */
-  --font-body: 'Inter', sans-serif;           /* body text & nav */
-  --font-mono: 'Space Mono', monospace;       /* label kecil, kode produk */
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'Space Mono', monospace;
 
-  /* Spacing scale (8px based) */
   --space-1: 0.5rem;
   --space-2: 1rem;
   --space-3: 1.5rem;
@@ -27,17 +18,13 @@
   --space-6: 3rem;
   --space-8: 4rem;
 
-  /* Layout */
   --navbar-height: 72px;
   --max-width: 1440px;
   --transition-fast: 0.2s ease;
   --transition-medium: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* =========================================================
-   RESET
-   Menghilangkan default styling browser yang tidak konsisten
-========================================================= */
+/* Reset */
 *,
 *::before,
 *::after {
@@ -74,12 +61,12 @@ button {
   cursor: pointer;
 }
 
-img {
+img,
+video {
   max-width: 100%;
   display: block;
 }
 
-/* Menghormati user yang menonaktifkan animasi di OS-nya */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -90,7 +77,6 @@ img {
   }
 }
 
-/* Skip link — muncul hanya saat difokus via keyboard (Tab) */
 .skip-link {
   position: absolute;
   top: -100px;
@@ -106,16 +92,13 @@ img {
   top: var(--space-2);
 }
 
-/* Focus state yang jelas untuk keyboard navigation (aksesibilitas) */
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
 }
 
-/* =========================================================
-   NAVBAR
-========================================================= */
+/* Navbar */
 .navbar {
   position: fixed;
   top: 0;
@@ -123,17 +106,25 @@ button:focus-visible {
   width: 100%;
   height: var(--navbar-height);
   z-index: 100;
+  color: var(--color-paper);
   background-color: transparent;
   border-bottom: 1px solid transparent;
+  opacity: 0;
+  animation: navFadeIn 0.6s ease forwards;
   transition: background-color var(--transition-medium),
-              border-color var(--transition-medium);
+              border-color var(--transition-medium),
+              color var(--transition-medium);
 }
 
-/* Class ini ditambahkan lewat JavaScript saat user scroll ke bawah */
 .navbar.is-scrolled {
+  color: var(--color-ink);
   background-color: rgba(242, 241, 236, 0.92);
   backdrop-filter: blur(8px);
   border-bottom-color: var(--color-line);
+}
+
+@keyframes navFadeIn {
+  to { opacity: 1; }
 }
 
 .navbar__inner {
@@ -147,7 +138,6 @@ button:focus-visible {
   gap: var(--space-3);
 }
 
-/* --- Logo --- */
 .navbar__logo {
   font-family: var(--font-display);
   font-size: 1.75rem;
@@ -155,9 +145,8 @@ button:focus-visible {
   white-space: nowrap;
 }
 
-/* --- Nav links (desktop) --- */
 .navbar__nav {
-  display: none; /* mobile-first: sembunyikan dulu, tampilkan di breakpoint tablet */
+  display: none;
 }
 
 .navbar__list {
@@ -174,7 +163,6 @@ button:focus-visible {
   padding: var(--space-1) 0;
 }
 
-/* Micro-interaction: garis bawah muncul dari tengah saat hover */
 .navbar__link::after {
   content: '';
   position: absolute;
@@ -182,7 +170,7 @@ button:focus-visible {
   bottom: 0;
   width: 0;
   height: 1px;
-  background-color: var(--color-ink);
+  background-color: currentColor;
   transition: width var(--transition-fast), left var(--transition-fast);
 }
 
@@ -191,7 +179,6 @@ button:focus-visible {
   left: 0;
 }
 
-/* --- Actions (search, account, bag) --- */
 .navbar__actions {
   display: flex;
   align-items: center;
@@ -205,12 +192,16 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-ink);
+  color: inherit;
   border-radius: 50%;
   transition: background-color var(--transition-fast);
 }
 
 .navbar__icon-btn:hover {
+  background-color: rgba(242, 241, 236, 0.16);
+}
+
+.navbar.is-scrolled .navbar__icon-btn:hover {
   background-color: var(--color-paper-soft);
 }
 
@@ -241,7 +232,6 @@ button:focus-visible {
   line-height: 1;
 }
 
-/* --- Burger button (mobile) --- */
 .navbar__burger {
   width: 32px;
   height: 32px;
@@ -255,11 +245,10 @@ button:focus-visible {
 .navbar__burger-line {
   width: 24px;
   height: 1.5px;
-  background-color: var(--color-ink);
+  background-color: currentColor;
   transition: transform var(--transition-fast), opacity var(--transition-fast);
 }
 
-/* Animasi burger jadi "X" saat menu terbuka (class ditambah via JS) */
 .navbar__burger.is-active .navbar__burger-line:first-child {
   transform: translateY(3.75px) rotate(45deg);
 }
@@ -268,9 +257,7 @@ button:focus-visible {
   transform: translateY(-3.75px) rotate(-45deg);
 }
 
-/* =========================================================
-   MOBILE DRAWER MENU
-========================================================= */
+/* Mobile drawer menu */
 .mobile-menu {
   position: fixed;
   top: 0;
@@ -337,16 +324,11 @@ button:focus-visible {
   visibility: visible;
 }
 
-/* Saat drawer terbuka, kunci scroll body (class ditambah via JS) */
 body.menu-open {
   overflow: hidden;
 }
 
-/* =========================================================
-   TEMPORARY PLACEHOLDER
-   Hanya untuk demo efek scroll navbar.
-   Akan digantikan Hero Section asli di lesson berikutnya.
-========================================================= */
+/* Section placeholder */
 .temp-placeholder {
   height: 100vh;
   display: flex;
@@ -357,24 +339,13 @@ body.menu-open {
   gap: var(--space-1);
   padding: var(--space-4);
   background: linear-gradient(180deg, var(--color-paper-soft), var(--color-paper));
-  border-bottom: 1px dashed var(--color-line);
 }
 
 .temp-placeholder--alt {
   background: linear-gradient(180deg, var(--color-paper), var(--color-paper-soft));
 }
 
-.temp-placeholder__hint {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--color-accent-soft);
-}
-
-/* =========================================================
-   RESPONSIVE — TABLET & DESKTOP
-   Mobile-first: style di atas untuk mobile,
-   lalu ditambah/ditimpa di sini untuk layar lebih besar
-========================================================= */
+/* Navbar responsive */
 @media (min-width: 768px) {
   .navbar__burger {
     display: none;
@@ -400,5 +371,228 @@ body.menu-open {
 
   .navbar__logo {
     font-size: 2rem;
+  }
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  height: 100svh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: var(--color-ink);
+  padding: 0 var(--space-3) var(--space-8);
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 20, 15, 0.35) 0%,
+    rgba(20, 20, 15, 0.5) 55%,
+    rgba(20, 20, 15, 0.75) 100%
+  );
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: var(--space-1);
+  max-width: 520px;
+}
+
+.hero__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-paper);
+  opacity: 0.85;
+  margin-bottom: var(--space-1);
+}
+
+.hero__headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 6.4vw, 3.75rem);
+  line-height: 1.04;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--color-paper);
+}
+
+.hero__desc {
+  max-width: 38ch;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-paper);
+  opacity: 0.82;
+  margin-top: var(--space-2);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.hero__scroll {
+  position: absolute;
+  right: var(--space-3);
+  bottom: var(--space-4);
+  z-index: 1;
+}
+
+.hero__scroll-line {
+  display: block;
+  width: 1px;
+  height: 40px;
+  background-color: rgba(242, 241, 236, 0.3);
+  overflow: hidden;
+  position: relative;
+}
+
+.hero__scroll-line::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-paper);
+  animation: scrollLine 2.2s ease-in-out infinite;
+}
+
+@keyframes scrollLine {
+  0%   { top: -100%; }
+  60%  { top: 100%; }
+  100% { top: 100%; }
+}
+
+/* Hero entrance animation */
+.hero__anim {
+  opacity: 0;
+  animation: heroFadeUp 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.hero__anim--1 { animation-delay: 0.2s; }
+.hero__anim--2 { animation-delay: 0.4s; }
+.hero__anim--3 { animation-delay: 0.6s; }
+.hero__anim--4 { animation-delay: 0.8s; }
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Buttons */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  transition: color var(--transition-medium);
+}
+
+.btn--primary {
+  color: var(--color-paper);
+  background-color: var(--color-ink);
+  background-image: linear-gradient(var(--color-accent), var(--color-accent));
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 0% 100%;
+  transition: background-size var(--transition-medium);
+}
+
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  background-size: 100% 100%;
+}
+
+.btn--secondary {
+  color: var(--color-ink);
+  border: 1px solid var(--color-ink);
+  background-image: linear-gradient(var(--color-ink), var(--color-ink));
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 0% 100%;
+  transition: background-size var(--transition-medium), color var(--transition-medium);
+}
+
+.btn--secondary:hover,
+.btn--secondary:focus-visible {
+  color: var(--color-paper);
+  background-size: 100% 100%;
+}
+
+.btn--on-dark.btn--primary {
+  color: var(--color-ink);
+  background-color: var(--color-paper);
+  background-image: linear-gradient(var(--color-accent-soft), var(--color-accent-soft));
+}
+
+.btn--on-dark.btn--secondary {
+  color: var(--color-paper);
+  border-color: var(--color-paper);
+  background-image: linear-gradient(var(--color-paper), var(--color-paper));
+}
+
+.btn--on-dark.btn--secondary:hover,
+.btn--on-dark.btn--secondary:focus-visible {
+  color: var(--color-ink);
+}
+
+/* Hero responsive */
+@media (min-width: 768px) {
+  .hero {
+    padding: 0 var(--space-6) var(--space-8);
+  }
+
+  .hero__actions {
+    gap: var(--space-3);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    padding: 0 var(--space-8) var(--space-8);
+  }
+
+  .hero__content {
+    max-width: 560px;
   }
 }
