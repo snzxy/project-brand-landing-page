@@ -2,6 +2,8 @@
 
 A modern streetwear/fashion brand landing page for Genuvaly.
 
+"disclaimer" This is just a dummy project, not tied to any brand, purely to improve skills and add to the portfolio. 
+
 ---
 
 ## Features
@@ -9,6 +11,7 @@ A modern streetwear/fashion brand landing page for Genuvaly.
 - Responsive navigation with mobile burger menu
 - Cinematic hero section with video background and poster fallback
 - Hero content positioned bottom-left with fade-in-from-below entrance animation
+- Featured Collection section with editorial layout and scroll-reveal animation
 - Modern, minimal UI
 - Mobile-first layout
 
@@ -27,7 +30,7 @@ A modern streetwear/fashion brand landing page for Genuvaly.
 
 - ✅ Navigation
 - ✅ Hero Section
-- ⏳ Featured Collection
+- ✅ Featured Collection
 - ⏳ New Arrival
 - ⏳ Best Seller
 - ⏳ About Brand
@@ -37,15 +40,14 @@ A modern streetwear/fashion brand landing page for Genuvaly.
 
 ## Folder Structure
 
-```
 genuvaly/
 ├── index.html
 ├── style.css
 ├── script.js
 └── assets/
-    ├── images/
-    └── videos/
-```
+├── images/
+└── videos/
+
 
 ---
 
@@ -53,6 +55,4 @@ genuvaly/
 
 Static site, no build step. Open `index.html` in a browser, or serve the folder with any static server:
 
-```
 npx serve .
-```
