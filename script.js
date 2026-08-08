@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  const revealTargets = document.querySelectorAll('.featured [data-reveal], .new-arrival [data-reveal]');
+  const revealTargets = document.querySelectorAll('.featured [data-reveal], .new-arrival [data-reveal], .about [data-reveal], .gallery [data-reveal]');
 
   if (revealTargets.length) {
     if ('IntersectionObserver' in window) {

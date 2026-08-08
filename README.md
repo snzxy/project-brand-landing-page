@@ -13,6 +13,8 @@ A modern streetwear/fashion brand landing page for Genuvaly.
 - Hero content positioned bottom-left with a fade-in-from-below entrance animation
 - Featured Collection section with editorial 3-card layout and scroll-reveal animation
 - New Arrival section with a 4-product grid, image-first cards, and scroll-reveal animation
+- About Brand section with an asymmetric editorial layout and scroll-reveal animation
+- Gallery section with a varied editorial image mosaic and scroll-reveal animation
 - Modern, minimal UI
 - Mobile-first layout
 
@@ -34,14 +36,22 @@ A modern streetwear/fashion brand landing page for Genuvaly.
 - ✅ Featured Collection
 - ✅ New Arrival
 - ⏳ Best Seller
-- ⏳ About Brand
+- ✅ About Brand
+- ✅ Gallery
 - ⏳ Footer
 
 ---
 
 ## Changelog
 
-### New Arrival (latest)
+### About Brand & Gallery (latest)
+- Added a new `#about` section: an asymmetric editorial layout pairing a large campaign image placeholder with a short brand statement ("Wear the Everyday. Move with Purpose.") and a concise description. Stacks to a single column on mobile, becomes a two-column asymmetric composition from desktop (1024px+).
+- Added a new `#gallery` section: a 6-image visual archive in a varied editorial mosaic (one large feature image, a wide image, and supporting smaller images) on desktop, simplifying to a clean 2-column grid on tablet and a single column on mobile.
+- Both sections use image placeholders (structured for easy replacement with real campaign photography) and reuse the existing scroll-reveal `IntersectionObserver` — no new animation system was introduced.
+- Gallery images have a restrained hover cue (slight scale + brightness) — no zoom, no social-style interactions.
+- Navbar, Mobile menu, Hero, Featured Collection, and New Arrival were not modified.
+
+### New Arrival
 - Added a new `#new-arrival` section, placed directly after Featured Collection.
 - Introduces 4 individual products — Everyday Oversized Tee, Terrace Nylon Jacket, Essential Cargo Pant, Matchday Cap — each with a number, name, category, and price. Unlike Featured Collection (which presents curated collections), this section focuses on single products.
 - Product cards use large, image-first visual placeholders (structured so real product photography can be dropped in later) with a subtle number watermark, matching the Featured Collection visual language.
